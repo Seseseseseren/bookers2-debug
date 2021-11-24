@@ -43,7 +43,6 @@
       <table>
           <% @book.book_comments.each do |book_comment| %>
             <% book_comment_user = book_comment.user %>
-            <!--上の意味は？-->
           <tr>
           <td>
           <%= link_to user_path(book_comment_user), class: "user_#{book_comment_user.id}" do %>
