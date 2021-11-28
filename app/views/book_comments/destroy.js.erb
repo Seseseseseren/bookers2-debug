@@ -1,1 +1,2 @@
-$(".book_comments_form" + <%= @book.id %>).html("<%= j(render 'book_comments/book_comments_form', book: @book) %>");
+$(".book_detail" ).html("<%= j(render 'books/book_detail', book: @comment.book) %>");
+$(".book_comments_form" ).html("<%= j(render 'book_comments/book_comments_form', book_comments: @comment.book.book_comments) %>");
