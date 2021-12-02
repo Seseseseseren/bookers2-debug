@@ -7,17 +7,21 @@ class Book < ApplicationRecord
     favorites.where(user_id: user.id).exists?
   end
 
+  def self.last_week
+    Book.joins(:favorites).where(created_at:(Time.current.at_end_of_day - 1.day)).group(:id).order("count(*) desc")
+  end
+
     def self.search_for(content, method)
     if method == 'perfect'
        Book.where(title: content)
-     elsif method == 'forward'
+    elsif method == 'forward'
        Book.where('title LIKE ?', content + '%')
-     elsif method == 'backward'
+    elsif method == 'backward'
        Book.where('title LIKE ?', '%' + content)
-     else
+    else
        Book.where('title LIKE ?', '%' + content + '%')
-     end
-   end
+    end
+    end
 
 
 	validates :title, presence: true
