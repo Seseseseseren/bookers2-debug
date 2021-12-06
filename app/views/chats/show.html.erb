@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <h2><%= @user.name %>さんとのチャット</h2>
+          <div class = "chats">
+              <%= render 'chats/chats_index', chats: @chats %>
+          </div>
+              <%= render 'chats/chats_form', chat: @chat  %>
+        </div>
+    </div>
+</div>

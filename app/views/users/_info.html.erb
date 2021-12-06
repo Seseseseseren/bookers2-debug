@@ -23,6 +23,9 @@
 		<%= link_to user_relationships_path(user), method: :delete do %>
         <button class="btn btn-primary">フォローを外す</button>
         </td>
+         <td>
+        <%= link_to 'Chatを始める', chat_path(@user.id) %>
+        </td>
         <% end %>
         <% else %>
         <td>
