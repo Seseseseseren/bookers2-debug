@@ -1,9 +1,13 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user, only:[:edit, :update ,:destroy]
+  #impressionist :unique: [:session_hash.to_s]
 
   def show
     @book = Book.find(params[:id])
+    if @book.user_id != user_id
+    impressionist(@book, nil, unique: [:session_hash.to_s])
+    end
     @new_book = Book.new
     @book_comment = BookComment.new
   end
