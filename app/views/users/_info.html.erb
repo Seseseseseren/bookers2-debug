@@ -24,7 +24,9 @@
         <button class="btn btn-primary">フォローを外す</button>
         </td>
          <td>
-        <%= link_to 'Chatを始める', chat_path(@user.id) %>
+        <% if (current_user.is_followed_by? user) && (user.is_followed_by? current_user)  %>
+        <%= link_to 'Chatを始める', chat_path(user.id) %>
+        <% end %>
         </td>
         <% end %>
         <% else %>
