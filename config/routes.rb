@@ -7,6 +7,8 @@ Rails.application.routes.draw do
  
   get 'chat/:id', to: 'chats#show', as: 'chat'
   resources :chats, only: [:create]
+  
+  resources :groups, except: [:destroy]
 
   resources :users do
     resource :relationships, only: [:create, :destroy]
