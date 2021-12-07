@@ -3,10 +3,7 @@ class Book < ApplicationRecord
 	has_many :favorites, dependent: :destroy
 	has_many :book_comments, dependent: :destroy
 	is_impressionable
-
- def favorited_by?(user)
-    favorites.where(user_id: user.id).exists?
- end
+  has_many :favorited_users, through: :favorites, source: :user
 
   def self.last_week
     Book.joins(:favorites).where(created_at:(Time.current.at_end_of_day - 1.day)).group(:id).order("count(*) desc")
@@ -27,5 +24,9 @@ class Book < ApplicationRecord
 
 	validates :title, presence: true
 	validates :body, presence: true, length: {maximum: 200}
+
+  def favorited_by?(user)
+   favorites.where(user_id: user.id).exists?
+  end
 
 end
