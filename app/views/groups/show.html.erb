@@ -13,18 +13,29 @@
   <tbody>
     <tr>
       <th></th>
-      <th></th>
-      <th></th>
-      <th colspan="4"></th>
+      <th>グループ名</th>
+      <th>紹介文</th>
+      <th>メンバー</th>
+      <th colspan="5"></th>
     </tr>
       <tr>
         <td><%= attachment_image_tag(@group, :image, :fill, 50, 50, fallback: "no-image-icon.jpg") %></td>
         <td><%= @group.name %></td>
         <td><%= @group.introduction %></td>
         <td>
+          <% @group.users.each do |member| %>
+          <%= member.name %><br>
+          <% end %>
+        </td>
+        <td>
         <% if @group.owner_id == current_user.id %>
         <%= link_to 'Edit', edit_group_path(@group.id), class: "btn btn-success " %></td>
+        <% elsif @group.users.include?(current_user) %>
+        <%= link_to 'Leave this group', group_path(@group), method: :delete, class: "btn btn-sm btn-danger" %>
+        <% else %>
+        <%= link_to 'Join this group', group_join_path(@group), class: "btn btn-sm btn-success" %>
        <% end %>
+       </td>
     	 </tr>
   </tbody>
   </table>
