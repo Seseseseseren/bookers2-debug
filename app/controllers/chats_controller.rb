@@ -1,5 +1,5 @@
 class ChatsController < ApplicationController
- #before_action :follow_each_other, only: [:show]
+#before_action :follow_each_other, only: [:show]
 
   def show
   @user = User.find(params[:id])
